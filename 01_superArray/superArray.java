@@ -53,7 +53,7 @@ public class superArray{
 	    
 	    Object[] copy =  new Object[thisArray.length];
 	    copy = thisArray;
-	    thisArray = new Object[thisArray.length+10];
+	    thisArray = new Object[thisArray.length*2];
 	    for(int i=0;i<copy.length;i++){
 		thisArray[i] = copy[i];
 	    }
@@ -99,8 +99,8 @@ public class superArray{
 	for(int i=index;i<length;i++){
 	    thisArray[i] = thisArray[i+1];
 	}
-	if(start<thisArray.length-10){
-	    resize(start+10);
+	if(start<=thisArray.length/4){
+	    resize(start/2);
 	}
     }
     public static void main(String[]args){
