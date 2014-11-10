@@ -7,6 +7,34 @@ public class superArray{
 	length = newlength;
     }
     
+    private boolean isValid(int testindex){
+	if(testindex<length){
+	    return true;
+	}
+	System.out.println("Error index out of range");
+	return false;
+    }
+    
+    public Object get(int index){
+	if(isValid(index)){
+	    return thisArray[index];
+	}
+	return null;
+    }
+
+    public Object set(int index, Object value){
+	if(isValid(index)){
+	    Object returnval = thisArray[index];
+	    thisArray[index] = value;
+	    return returnval;
+	}
+	return null;
+    }
+    
+    public void clear(){
+	thisArray = new Object[10];
+    }
+
     public superArray(){
 	this(10);
     }
@@ -38,6 +66,18 @@ public class superArray{
 	
     }
     
+    public void add(Object thingy, int index){
+	if(isValid(index)){
+	    
+	    add(thisArray[length-1]);
+	    for(int i=start-2;i>index;i--){
+		thisArray[i] = thisArray[i-1];
+	    }
+	    thisArray[index] = thingy;
+	}
+    }
+	
+
     public int size(){
 	return length;
     }
@@ -52,7 +92,17 @@ public class superArray{
 	    thisArray[i] = copy[i];
 	}
     }
-
+    
+    public void remove(int index){
+	length -=1;
+	start -=1;
+	for(int i=index;i<length;i++){
+	    thisArray[i] = thisArray[i+1];
+	}
+	if(start<thisArray.length-10){
+	    resize(start+10);
+	}
+    }
     public static void main(String[]args){
 	superArray test = new superArray(0);
 	test.add(new Integer(1));
@@ -61,6 +111,8 @@ public class superArray{
 	test.add(new Integer(4));
 	test.add(new Integer(5));
 	test.add(new Integer(6));
+	System.out.println(test.get(6));
+	test.remove(5);
 	test.resize(20);
 	test.resize(30);
 	System.out.println(test);
