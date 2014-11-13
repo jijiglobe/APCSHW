@@ -1,0 +1,11 @@
+import java.util.*;
+public class collapse{
+    
+    
+    public static void main(String[]args){
+	ArrayList<Integer> list;
+	list = new ArrayList<Integer>();
+	list.addAll([1,2,3,4,5,5,6,67,7]);
+	System.out.println(list);
+    }
+}
