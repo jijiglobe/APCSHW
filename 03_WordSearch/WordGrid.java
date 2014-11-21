@@ -26,16 +26,75 @@ public class WordGrid{
 	clear();
     }
     
-    public void addWordHorizontal(int x, int y, String word){
-	for(int i=0; i<word.length();i++){
-	    grid[y][x+i] = word.charAt(i);
+    public boolean checkspace(int x, int y, String word, int d){
+
+	for(int i=0;i<word.length();i++){
+	    if(grid[y][x]!=' ' || grid[y][x] != word.charAt(i)){
+		return false;
+	    }
+	       
+	    if(d==0){
+		y--;
+	    }else if(d==1){
+		y--;x++;
+	    }else if(d==2){
+		x++;
+	    }else if(d==3){
+		y++;x++;
+	    }else if(d==4){
+		y++;
+	    }else if(d==5){
+		y++;x--;
+	    }else if(d==6){
+		x--;
+	    }else if(d==7){
+		x--;y--;
+	    }
+	    
 	}
+	return false;
+    }
+    public boolean addWordHorizontal(int x, int y, String word, int d){
+	System.out.println(checkspace(x,y,word,d));
+	    
+	if(checkspace(x,y,word,d)){
+	    for(int i=0; i<word.length();i++){
+		grid[y][x] = word.charAt(i);
+		
+		if(d==0){
+		    y--;
+		}else if(d==1){
+		    y--;x++;
+		}else if(d==2){
+		    x++;
+		}else if(d==3){
+		    y++;x++;
+		}else if(d==4){
+		    y++;
+		}else if(d==5){
+		    y++;x--;
+		}else if(d==6){
+		    x--;
+		}else if(d==7){
+		    x--;y--;
+		}
+		
+	    }
+	}
+	return true;
     }
     public static void main(String[]args){
-	WordGrid wordgrid = new WordGrid(3,3);
-	wordgrid.addWordHorizontal(0,1,"hi");
-	wordgrid.addWordHorizontal(1,0,"hi");
+	WordGrid wordgrid = new WordGrid(5,5);
+	/*	for(int i=0;i<8;i++){
+	    wordgrid.clear();
+	    wordgrid.addWordHorizontal(2,2,"123",i);
 
+
+	}
+	*/
+	wordgrid.addWordHorizontal(0,1,"123",2);
+	//	wordgrid.addWordHorizontal(1,0,"123",4);
 	System.out.println(wordgrid);
+	//	wordgrid.addWordHorizontal(0,0,"123",2);
     }
 }
