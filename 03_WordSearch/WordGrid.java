@@ -29,7 +29,7 @@ public class WordGrid{
     public boolean checkspace(int x, int y, String word, int d){
 
 	for(int i=0;i<word.length();i++){
-	    if(grid[y][x]!=' ' || grid[y][x] != word.charAt(i)){
+	    if(grid[y][x]!=' ' && grid[y][x] != word.charAt(i)){
 		return false;
 	    }
 	       
@@ -52,11 +52,9 @@ public class WordGrid{
 	    }
 	    
 	}
-	return false;
+	return true;
     }
     public boolean addWordHorizontal(int x, int y, String word, int d){
-	System.out.println(checkspace(x,y,word,d));
-	    
 	if(checkspace(x,y,word,d)){
 	    for(int i=0; i<word.length();i++){
 		grid[y][x] = word.charAt(i);
@@ -77,11 +75,11 @@ public class WordGrid{
 		    x--;
 		}else if(d==7){
 		    x--;y--;
-		}
-		
+		}	
 	    }
+	    return true;
 	}
-	return true;
+	return false;
     }
     public static void main(String[]args){
 	WordGrid wordgrid = new WordGrid(5,5);
@@ -93,6 +91,7 @@ public class WordGrid{
 	}
 	*/
 	wordgrid.addWordHorizontal(0,1,"123",2);
+	wordgrid.addWordHorizontal(0,0,"123",4);
 	//	wordgrid.addWordHorizontal(1,0,"123",4);
 	System.out.println(wordgrid);
 	//	wordgrid.addWordHorizontal(0,0,"123",2);
