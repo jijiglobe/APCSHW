@@ -1,6 +1,9 @@
 public class WordGrid{
     private char[][] grid;
-    
+    /**
+     * clears out the grid and replaces every value with a '&nbsp' character
+     *@return void
+     */
     public void clear(){
 	for(int i=0;i<grid.length;i++){
 	    for(int t=0;t<grid[i].length;t++){
@@ -8,7 +11,10 @@ public class WordGrid{
 	    }
 	}
     }
-
+    /**
+     * returns a String formatted version of the grid for use as output to terminal
+     *@return returns a String in the way of output
+     */
     public String toString(){
 	String ans="";
 	for(int i=0;i<grid.length;i++){
