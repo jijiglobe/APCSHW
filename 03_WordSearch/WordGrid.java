@@ -1,8 +1,11 @@
+import java.util.*;
+import java.io.*;
+
 public class WordGrid{
     private char[][] grid;
+    private Random seed = new Random(10);
     /**
      * clears out the grid and replaces every value with a '&nbsp' character
-     *@return void
      */
     public void clear(){
 	for(int i=0;i<grid.length;i++){
@@ -10,6 +13,28 @@ public class WordGrid{
 		grid[i][t] = ' ';
 	    }
 	}
+    }
+    public void fillInBlanks(){
+	for(int i=0;i<grid.length;i++){
+	    for(int t=0;t<grid[i].length;t++){
+		if(grid[i][t]==' '){
+		    grid[i][t] = '-';
+		}
+	    }
+	}
+    }
+    public ArrayList fill(ArrayList<String> words){
+	//	String word = "hello";
+	ArrayList<String> ans = new ArrayList<String>();
+	for(int t=0;t<words.size();t++){
+	    for(int i=0;i<100;i++){
+		if(addWord(seed.nextInt(grid[0].length),seed.nextInt(grid.length),words.get(t),seed.nextInt(8))){
+		    ans.add(words.get(t));
+		    break;
+		}
+	    }
+	}
+	return ans;
     }
     /**
      * returns a String formatted version of the grid for use as output to terminal
@@ -26,78 +51,116 @@ public class WordGrid{
 	}
 	return ans;
     }	
-
+    /**
+     *creates a new WordGrid of a specific width and height
+     *@param width determines width of a single row of the grid
+     *@param height determines the amount of rows in the grid
+     */
     public WordGrid(int width, int height){
 	grid = new char[height][width];
 	clear();
     }
-    
+    /** determines if there is space in the grid to put a specific word in a specific direction
+     *@param x x-location of the first letter
+     *@param y y-location of the first letter
+     *@param word The word to be checked for
+     *@param d determines the direction the word will write in 0 is up and 1 is up-right etc...
+     */    
     public boolean checkspace(int x, int y, String word, int d){
+	int dx =0;
+	int dy =0;
+	if(d==0){
+	    dy--;
+	}else if(d==1){
+	    dy--;dx++;
+	}else if(d==2){
+	    dx++;
+	}else if(d==3){
+	    dy++;dx++;
+	}else if(d==4){
+	    dy++;
+	}else if(d==5){
+	    dy++;dx--;
+	}else if(d==6){
+	    dx--;
+	}else if(d==7){
+	    dx--;dy--;
+	}	
 
 	for(int i=0;i<word.length();i++){
-	    if(grid[y][x]!=' ' && grid[y][x] != word.charAt(i)){
+	    try{
+		if(grid[y][x]!=' ' && grid[y][x] != word.charAt(i)){
+		    return false;
+		}	
+	    } catch(IndexOutOfBoundsException checking){
 		return false;
 	    }
-	       
-	    if(d==0){
-		y--;
-	    }else if(d==1){
-		y--;x++;
-	    }else if(d==2){
-		x++;
-	    }else if(d==3){
-		y++;x++;
-	    }else if(d==4){
-		y++;
-	    }else if(d==5){
-		y++;x--;
-	    }else if(d==6){
-		x--;
-	    }else if(d==7){
-		x--;y--;
-	    }
-	    
+	    y+=dy;
+	    x+=dx;
 	}
+   
 	return true;
     }
-    public boolean addWordHorizontal(int x, int y, String word, int d){
+    /**
+     *adds a word to the WordGrid
+     *@param x x-location of the first letter
+     *@param y y-location of the first letter
+     *@param word the word to be added to the grid
+     *@param d determines the direction the word will write in 0 is up and 1 is up-right etc...
+     *@return true if the operation was a success, false otherwise
+     */
+    public boolean addWord(int x, int y, String word, int d){
 	if(checkspace(x,y,word,d)){
+	    int dx = 0;int dy = 0;
+	    if(d==0){
+		dy--;
+	    }else if(d==1){
+		dy--;dx++;
+	    }else if(d==2){
+		dx++;
+	    }else if(d==3){
+		dy++;dx++;
+	    }else if(d==4){
+		dy++;
+	    }else if(d==5){
+		dy++;dx--;
+	    }else if(d==6){
+		dx--;
+	    }else if(d==7){
+		dx--;dy--;
+	    }	
 	    for(int i=0; i<word.length();i++){
 		grid[y][x] = word.charAt(i);
-		
-		if(d==0){
-		    y--;
-		}else if(d==1){
-		    y--;x++;
-		}else if(d==2){
-		    x++;
-		}else if(d==3){
-		    y++;x++;
-		}else if(d==4){
-		    y++;
-		}else if(d==5){
-		    y++;x--;
-		}else if(d==6){
-		    x--;
-		}else if(d==7){
-		    x--;y--;
-		}	
+		x+=dx;
+		y+=dy;
 	    }
 	    return true;
 	}
 	return false;
     }
     public static void main(String[]args){
-	WordGrid wordgrid = new WordGrid(5,5);
+	WordGrid wordgrid = new WordGrid(10,10);
 	/*	for(int i=0;i<8;i++){
-	    wordgrid.clear();
-	    wordgrid.addWordHorizontal(2,2,"123",i);
+		wordgrid.clear();
+		wordgrid.addWordHorizontal(2,2,"123",i);
 
 
 	}
 	*/
-	wordgrid.addWordHorizontal(0,1,"123",2);
-	wordgrid.addWordHorizontal(0,0,"123",4);
+	ArrayList<String> list = new ArrayList<String>();
+	list.add("word");
+	list.add("hello");
+	list.add("goodbye");
+	list.add("syzygy");
+	list.add("character");
+	list.add("add");
+	list.add("minus");
+	list.add("plus");
+	list.add("pikachu");
+	list.add("wordagain");
+	
+	System.out.println(wordgrid.fill(list));
+	wordgrid.fillInBlanks();
 	//	wordgrid.addWordHorizontal(1,0,"123",4);
 	System.out.println(wordgrid);
 	//	wordgrid.addWordHorizontal(0,0,"123",2);
