@@ -23,6 +23,17 @@ public class WordGrid{
 	    }
 	}
     }
+
+    public void fillBlanksWithChars(){
+	for(int i=0;i<grid.length;i++){
+	    for(int t=0;t<grid[i].length;t++){
+		if(grid[i][t]==' '){
+		    grid[i][t] = (char)(seed.nextInt(26)+'a');
+		}
+	    }
+	}
+    }	
+
     public ArrayList fill(ArrayList<String> words){
 	//	String word = "hello";
 	ArrayList<String> ans = new ArrayList<String>();
@@ -160,7 +171,8 @@ public class WordGrid{
 	list.add("wordagain");
 	
 	System.out.println(wordgrid.fill(list));
-	wordgrid.fillInBlanks();
+	wordgrid.fillBlanksWithChars();
+	//	wordgrid.fillInBlanks();
 	//	wordgrid.addWordHorizontal(1,0,"123",4);
 	System.out.println(wordgrid);
 	//	wordgrid.addWordHorizontal(0,0,"123",2);
