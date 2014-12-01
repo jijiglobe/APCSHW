@@ -3,7 +3,7 @@ import java.io.*;
 
 public class WordGrid{
     private char[][] grid;
-    private Random seed = new Random(10);
+    private Random seed;
     /**
      * clears out the grid and replaces every value with a '&nbsp' character
      */
@@ -27,15 +27,14 @@ public class WordGrid{
     public void fillBlanksWithChars(){
 	for(int i=0;i<grid.length;i++){
 	    for(int t=0;t<grid[i].length;t++){
-		if(grid[i][t]==' '){
+		if(grid[i][t]==' '||grid[i][t]=='-'){
 		    grid[i][t] = (char)(seed.nextInt(26)+'a');
 		}
 	    }
 	}
     }	
 
-    public ArrayList fill(ArrayList<String> words){
-	//	String word = "hello";
+    public ArrayList<String> fill(ArrayList<String> words){
 	ArrayList<String> ans = new ArrayList<String>();
 	for(int t=0;t<words.size();t++){
 	    for(int i=0;i<100;i++){
@@ -69,7 +68,13 @@ public class WordGrid{
      */
     public WordGrid(int width, int height){
 	grid = new char[height][width];
+	seed = new Random(10);
 	clear();
+    }
+    
+    public WordGrid(int width, int height, int newseed){
+	this(width,height);
+	seed = new Random(newseed);
     }
     /** determines if there is space in the grid to put a specific word in a specific direction
      *@param x x-location of the first letter
@@ -150,14 +155,14 @@ public class WordGrid{
 	return false;
     }
     public static void main(String[]args){
-	WordGrid wordgrid = new WordGrid(10,10);
+       	WordGrid wordgrid = new WordGrid(10,10);
 	/*	for(int i=0;i<8;i++){
-		wordgrid.clear();
-		wordgrid.addWordHorizontal(2,2,"123",i);
+	    wordgrid.clear();
+	    wordgrid.addWordHorizontal(2,2,"123",i);
+	    
+	    
+	    }*/
 
-
-	}
-	*/
 	ArrayList<String> list = new ArrayList<String>();
 	list.add("word");
 	list.add("hello");
@@ -171,10 +176,10 @@ public class WordGrid{
 	list.add("wordagain");
 	
 	System.out.println(wordgrid.fill(list));
+	wordgrid.fillInBlanks();
 	wordgrid.fillBlanksWithChars();
-	//	wordgrid.fillInBlanks();
 	//	wordgrid.addWordHorizontal(1,0,"123",4);
 	System.out.println(wordgrid);
-	//	wordgrid.addWordHorizontal(0,0,"123",2);
+	//	wordgrid.addWordHorizontal(0,0,"123",2);*/
     }
 }
