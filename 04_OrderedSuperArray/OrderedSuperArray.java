@@ -1,5 +1,6 @@
 public class OrderedSuperArray extends superArray{
-
+    //    pubic void sort(){
+	
     public void add(String word){
 	this.resize(this.size()+1);
 	int i=this.size();
@@ -9,6 +10,14 @@ public class OrderedSuperArray extends superArray{
 	this.set(i,word);
     }
 
+    public String set(int index, String Word){
+	int i=0;
+	while(i<size() && Word.compareTo(get(i))<=0){
+	}
+	super.add(Word,i);
+	return Word;
+    }
+	    
     public void add(int index, String word){
 	add(word);
     }

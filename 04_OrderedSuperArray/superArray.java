@@ -85,6 +85,14 @@ public class superArray{
 	}
     }
     
+    public void shifto(int index1,int index2){
+	String copy = get(index2);
+	for(;index2>index1;i--){
+	    set(i,get(i-1));
+	}
+	set(i-1,copy);
+    }
+	
     public void remove(int index){
 	length -=1;
 	start -=1;
@@ -95,6 +103,17 @@ public class superArray{
 	    resize(start/2);
 	}
     }
+    public int findIndex(){
+
+    }
+    public void insertionSort(){
+	
+	for(int i=0;i<size();i++){
+	    
+	}
+
+    }
+
     public static void main(String[]args){
 	superArray test = new superArray(0);
 	//	test.set(6,new Integer(1));
