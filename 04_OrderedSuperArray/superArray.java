@@ -4,7 +4,7 @@ public class superArray{
     public superArray(int newlength){
 	thisArray = new String[length + 10];
 	start = 0;
-	length = newlength;
+	length = 0;
     }
     
     private void isValid(int testindex){
@@ -85,14 +85,20 @@ public class superArray{
 	}
     }
     
-    public void shifto(int index1,int index2){
+    public void shifto(int index2){
 	String copy = get(index2);
-	for(;index2>index1;i--){
-	    set(i,get(i-1));
+	if(size()==0)
+	    this.set(0,copy);
+	else{
+
+	    while(index2!=0&&copy.compareTo(get(index2-1))<=0){
+		set(index2,get(index2-1));
+		index2--;
+	    }
+	    
+	    set(index2,copy);
 	}
-	set(i-1,copy);
     }
-	
     public void remove(int index){
 	length -=1;
 	start -=1;
@@ -103,13 +109,14 @@ public class superArray{
 	    resize(start/2);
 	}
     }
-    public int findIndex(){
 
-    }
+
     public void insertionSort(){
 	
-	for(int i=0;i<size();i++){
-	    
+	for(int i=0;i<size()-1;i++){
+	    if(get(i).compareTo(get(i+1))>0){
+		shifto(i+1);
+	    }
 	}
 
     }
@@ -117,12 +124,21 @@ public class superArray{
     public static void main(String[]args){
 	superArray test = new superArray(0);
 	//	test.set(6,new Integer(1));
+	//	System.out.println(test);
+	/*test.add("abc");
+	test.add("abd");
+	test.add("bdc");
+	test.add("zzzz");
+	test.add("abb");
+	test.add("bbb");
+	test.add("remkl");
+	test.add("FIRST");
+	test.add("SECOND");
+	test.add("abc");
+	test.add("abc");
 	System.out.println(test);
-	
+	test.insertionSort();
 	//	test.add(new Integer(7),6);
-	
-	test.remove(5);
-	test.resize(20);
-	test.resize(30);
+	System.out.println(test);*/
     }
 }
