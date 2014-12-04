@@ -9,7 +9,7 @@ public class superArray{
     
     private void isValid(int testindex){
 	if(testindex>=start){
-	    throw new IndexOutOfBoundsException("Your index was out of bounds");	
+	    throw new IndexOutOfBoundsException("Your index("+testindex+") was out of bounds");	
 	}
     }
     
@@ -19,6 +19,12 @@ public class superArray{
     }
 
     public String set(int index, String value){
+	isValid(index);
+	String returnval = thisArray[index];
+	thisArray[index] = value;
+	return returnval;
+    }
+    public String change(int index, String value){
 	isValid(index);
 	String returnval = thisArray[index];
 	thisArray[index] = value;
@@ -34,23 +40,46 @@ public class superArray{
     }
     
     public String toString(){
-	String ans = "["+thisArray[0];
-	for(int i=1;i<length;i++){
-	    ans += " "+thisArray[i];
+	if(size()>0){
+	    String ans = "["+thisArray[0];
+	    for(int i=1;i<length;i++){
+		ans += " "+thisArray[i];
+	    }
+	    ans +="]";
+	    return ans;
+	}else{
+	    return "[]";
 	}
-	ans +="]";
-	return ans;
     }
     
     public void add(String thingy){
 	if(thisArray.length == start){
-	    
 	    String[] copy =  new String[thisArray.length];
 	    copy = thisArray;
 	    thisArray = new String[thisArray.length*2];
 	    for(int i=0;i<copy.length;i++){
 		thisArray[i] = copy[i];
 	    }
+	    start += 1;
+	    length += 1;
+	    thisArray[copy.length] = thingy;
+	}else{
+	    thisArray[start] = thingy;
+	    start += 1;
+	    length += 1;
+	}
+	
+    }
+    public void plus(String thingy){
+	if(thisArray.length == start){
+	    String[] copy =  new String[thisArray.length];
+	    copy = thisArray;
+	    thisArray = new String[thisArray.length*2];
+	    for(int i=0;i<copy.length;i++){
+		thisArray[i] = copy[i];
+	    }
+	    start += 1;
+	    length += 1;
 	    thisArray[copy.length] = thingy;
 	}else{
 	    thisArray[start] = thingy;
@@ -62,7 +91,7 @@ public class superArray{
     
     public void add(String thingy, int index){
 	isValid(index);	    
-	add(thisArray[length-1]);
+	plus(thisArray[length-1]);
 	for(int i=start-2;i>index;i--){
 	    thisArray[i] = thisArray[i-1];
 	}
@@ -72,6 +101,15 @@ public class superArray{
 
     public int size(){
 	return length;
+    }
+
+    public int find(String target){
+	for(int i=0;i<size();i++){
+	    if(get(i).equals(target)){
+		return i;
+	    }
+	}
+	return -1;
     }
 
     public void resize(int newlength){
@@ -87,17 +125,12 @@ public class superArray{
     
     public void shifto(int index2){
 	String copy = get(index2);
-	if(size()==0)
-	    this.set(0,copy);
-	else{
+	while(index2>0&&copy.compareTo(get(index2-1))<=0){
+	    change(index2,get(index2-1));
+	    index2--;
+	} 
+	change(index2,copy);
 
-	    while(index2!=0&&copy.compareTo(get(index2-1))<=0){
-		set(index2,get(index2-1));
-		index2--;
-	    }
-	    
-	    set(index2,copy);
-	}
     }
     public void remove(int index){
 	length -=1;

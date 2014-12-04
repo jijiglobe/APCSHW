@@ -10,11 +10,16 @@ public class OrderedSuperArray extends superArray{
 	    super.set(i,get(i-1));
 	}
 	this.set(i,word);*/
-	super.add(word);
-	shifto(size()-1);
-	
+	int i=size();
+	if(i==0){
+	    super.add(word);
+	}else{
+	    for(;i!=1&&word.compareTo(get(i-1))<=0;i--){
+	    }
+	    super.add(word,i-1);
+	}
     }
-
+    
     public String set(int index, String Word){
 	int i=0;
 	while(i<size() && Word.compareTo(get(i))<=0){
@@ -27,10 +32,15 @@ public class OrderedSuperArray extends superArray{
 	add(word);
     }
 
+    public int find(String target){
+	int previousguess=0;
+	int guess = size()/2;
+	while(guess!=0&&guess!=size()){
+	    
+	}
+    }
     public static void main(String[]args){
 	OrderedSuperArray test = new OrderedSuperArray();
-	System.out.println(test);
-
 	test.add("abc");
 	test.add("abd");
 	test.add("abb");
@@ -46,6 +56,7 @@ public class OrderedSuperArray extends superArray{
 	System.out.println(test);
 
 	test.insertionSort();
+	System.out.println(test);
 	test.add("IMFIRST");
 	test.add("NOIAM");
 	test.add("aba");
