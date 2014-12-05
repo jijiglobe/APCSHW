@@ -205,13 +205,13 @@ public void badInsertionSort(){
 	for(int i=0;i<500000;i++){
 	    test.add(""+i);
 	}
-	//	if(args[0].equals("selectionSort")){
+	if(args[0].equals("selectionSort")){
 	   test.selectionSort();
-	    //	}else if(args[0].equals("insertionSort")){
-	// test.insertionSort();
-	    //	}else{
-	    //  test.defaultSort();
-	    //	}
+	}else if(args[0].equals("insertionSort")){
+		 test.insertionSort();
+	}else{
+	  test.defaultSort();
+	}
 	//	test.add(new Integer(7),6);
 	System.out.println(test);
 	
