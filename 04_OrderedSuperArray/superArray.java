@@ -35,6 +35,16 @@ public class superArray{
 	thisArray = new String[10];
     }
 
+public void badInsertionSort(){
+        OrderedSuperArray c = new OrderedSuperArray();
+        while( this.size() > 0){ 
+            c.add(this.remove(0));
+        }
+        while(c.size() > 0){
+            this.add(c.remove(0));
+        }
+}
+
     public superArray(){
 	this(10);
     }
