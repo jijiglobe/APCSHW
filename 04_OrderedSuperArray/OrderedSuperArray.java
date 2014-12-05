@@ -36,8 +36,19 @@ public class OrderedSuperArray extends superArray{
 	int previousguess=0;
 	int guess = size()/2;
 	while(guess!=0&&guess!=size()){
-	    
+	    if(target.equals(get(guess))){
+		return guess;
+	    }else if(target.compareTo(get(guess))<0){
+		int holder = previousguess;
+		previousguess = guess;
+		guess -= Math.abs(guess - holder)/2; 
+	    }else{
+		int holder = previousguess;
+		previousguess = guess;
+		guess += Math.abs(guess - holder)/2; 
+	    }
 	}
+	return -1;
     }
     public static void main(String[]args){
 	OrderedSuperArray test = new OrderedSuperArray();

@@ -142,15 +142,17 @@ public void badInsertionSort(){
 	change(index2,copy);
 
     }
-    public void remove(int index){
+    public String remove(int index){
 	length -=1;
 	start -=1;
+	String pop = get(index);
 	for(int i=index;i<length;i++){
 	    thisArray[i] = thisArray[i+1];
 	}
 	if(start<=thisArray.length/4){
 	    resize(start/2);
 	}
+	return pop;
     }
 
 
