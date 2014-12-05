@@ -1,3 +1,5 @@
+import java.util.*;
+import java.io.*;
 public class superArray{
     private String[] thisArray;
     private int length,start;
@@ -166,11 +168,29 @@ public void badInsertionSort(){
 
     }
 
+    public void selectionSort(){
+	for(int i=0;i<size()-1;i++){
+	    int least = i;
+	    int t=i;
+	    for(;t<size();t++){
+		if(get(t).compareTo(get(least))<=0){
+		    least = t;
+		}
+	    }
+	    String copy= get(i);
+	    thisArray[i] = thisArray[least];
+	    thisArray[least] = copy;
+	}
+    }
+
+    public void defaultSort(){
+	Arrays.sort(thisArray,0,size());
+    }
     public static void main(String[]args){
 	superArray test = new superArray(0);
 	//	test.set(6,new Integer(1));
 	//	System.out.println(test);
-	/*test.add("abc");
+	/*	test.add("abc");
 	test.add("abd");
 	test.add("bdc");
 	test.add("zzzz");
@@ -181,9 +201,19 @@ public void badInsertionSort(){
 	test.add("SECOND");
 	test.add("abc");
 	test.add("abc");
-	System.out.println(test);
-	test.insertionSort();
-	//	test.add(new Integer(7),6);
 	System.out.println(test);*/
+	for(int i=0;i<500000;i++){
+	    test.add(""+i);
+	}
+	//	if(args[0].equals("selectionSort")){
+	   test.selectionSort();
+	    //	}else if(args[0].equals("insertionSort")){
+	// test.insertionSort();
+	    //	}else{
+	    //  test.defaultSort();
+	    //	}
+	//	test.add(new Integer(7),6);
+	System.out.println(test);
+	
     }
 }
