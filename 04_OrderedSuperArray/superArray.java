@@ -190,8 +190,8 @@ public void badInsertionSort(){
 	superArray test = new superArray(0);
 	//	test.set(6,new Integer(1));
 	//	System.out.println(test);
-	/*	test.add("abc");
-	test.add("abd");
+		test.add("abc");
+		/*test.add("abd");
 	test.add("bdc");
 	test.add("zzzz");
 	test.add("abb");
@@ -202,18 +202,17 @@ public void badInsertionSort(){
 	test.add("abc");
 	test.add("abc");
 	System.out.println(test);*/
-	for(int i=0;i<500000;i++){
+	for(int i=0;i<100000;i++){
 	    test.add(""+i);
 	}
 	if(args[0].equals("selectionSort")){
 	   test.selectionSort();
 	}else if(args[0].equals("insertionSort")){
-		 test.insertionSort();
+	    test.insertionSort();
 	}else{
-	  test.defaultSort();
+	    test.defaultSort();
 	}
 	//	test.add(new Integer(7),6);
-	System.out.println(test);
 	
     }
 }
