@@ -1,0 +1,35 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class Practice extends JFrame implements ActionListener{
+    private JButton ctof;
+    private JButton ftoc;
+    private JTextField input;
+    private Container c1;
+    private JLabel output;
+    public Practice(){
+	addWindowListener(this);
+	this.setTitle("GOOEY");
+	this.setSize(300,400);
+	this.setLocation(100,100);
+	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	input = new JTextField(12);
+	ctof = new JButton("Celsius to Fahrenheit");
+	ftoc = new JButton("Fahrenheit to Celsius");
+	output = new JLabel("0");
+	c1 = this.getContentPane();
+	c1.setLayout(new FlowLayout());
+	
+	c1.add(input);
+	c1.add(ctof);
+	c1.add(ftoc);
+	c1.add(output);
+    }
+
+    public void actionPerformed(ActionEvent e){
+	System.out.println("a button was pressed");
+	String action = e.getActionCommand();
+	output.setText("it worked!");
+   }
+}
