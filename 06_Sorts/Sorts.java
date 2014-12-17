@@ -71,7 +71,7 @@ public class Sorts{
 	    mystring+=myarray[i];
 	}
 	System.out.println(mystring);
-	bubble(myarray);
+	selection(myarray);
 	mystring= "";
 	for(int i=0;i<myarray.length;i++){
 	    mystring+=myarray[i];
