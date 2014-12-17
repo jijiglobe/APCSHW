@@ -1,0 +1,83 @@
+import java.util.*;
+public class Sorts{
+    public static void selection(int[] array){
+	for(int i=0;i<array.length;i++){
+	    int least = i;
+	    int t=i;
+	    for(;t<array.length;t++){
+		if(array[t]<array[least]){
+		    least = t;
+		}
+	    }
+	    int copy= array[i];
+	    array[i] = array[least];
+	    array[least] = copy;
+	}
+    }
+
+    
+    public static void shifto(int[] array,int index2){
+	int copy = array[index2];
+	while(index2>0&&copy<array[index2-1]){
+	    change(array,index2,array[index2-1]);
+	    index2--;
+	} 
+	change(array,index2,copy);
+
+    }
+
+    public static int change(int[] array, int index, int value){
+	int returnval = array[index];
+	array[index] = value;
+	return returnval;
+    }
+
+    
+    public static void insertion(int[]array){	
+	for(int i=0;i<array.length;i++){
+	    if(array[i]<array[i+1]){
+		shifto(array,i+1);
+	    }
+	}
+
+    }
+
+    public static void bubble(int[]array){
+	int sortedTo = array.length - 1;
+	boolean switched = true;
+	while(switched&&sortedTo>0){
+	    switched = false;
+	    for(int i=0;i<sortedTo;i++){//iterates through unsorted section of array
+		if(array[i]>array[i+1]){//checks if the values are out of order
+		    int copy = array[i+1];//switches the two values in the wrong order
+		    array[i+1] = array[i];
+		    array[i] = copy;
+		    switched = true; //marks that switches have happened
+		}
+	    }
+       	    sortedTo--;
+	}
+	
+    }
+
+    public static void main(String[]args){
+	Random rand = new Random();
+	int[] myarray = new int[10];
+	for(int i=0;i<myarray.length;i++){
+	    myarray[i] = rand.nextInt(10);
+	}
+	String mystring = "";
+	for(int i=0;i<myarray.length;i++){
+	    mystring+=myarray[i];
+	}
+	System.out.println(mystring);
+	bubble(myarray);
+	mystring= "";
+	for(int i=0;i<myarray.length;i++){
+	    mystring+=myarray[i];
+	}
+	System.out.println(mystring);
+
+    }
+
+}
