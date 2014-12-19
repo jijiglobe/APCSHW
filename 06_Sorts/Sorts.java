@@ -62,23 +62,30 @@ public class Sorts{
 
 
     public static void radix(int[] array){
-	boolean madesorts = true;
+	int madesorts = 0;
 	int digit = 10;
-	ArrayList<ArrayList<Integer>> bucket = new ArrayList<ArrayList<Integer>>(10);
-	while(madesorts){
-	    bucket.clear();
+	ArrayList<ArrayList<Integer>> bucket = new ArrayList<ArrayList<Integer>>(20);
+	for(int i=0;i<10;i++){
+	    bucket.add(new ArrayList<Integer>());
+	}
+	while(madesorts< 3){
+	    //bucket.clear();
 	    for(int i=0;i<array.length;i++){
 		bucket.get((array[i]%digit)/(digit/10)).add(array[i]);//adds the current value to the end of the corresponding bucket
 	    }
 	    digit++;
 	    if(bucket.get(0).size() == array.length){ //checks if the array is already sorted
-		madesorts = false;
+		madesorts++;
 	    }
 	    int index = 0;
 	    for(ArrayList<Integer> i : bucket){ // reads the elements from the bucket and adds them back to array 
 		for(int t : i){
-		    array[index] = i.get(t);
+		    array[index] = t;
+		    index++;
 		}
+	    }
+	    for(int i=0;i<bucket.size();i++){
+		bucket.get(i).clear();
 	    }
 	    digit*=10;
 	}
@@ -88,7 +95,7 @@ public class Sorts{
 	Random rand = new Random();
 	int[] myarray = new int[10];
 	for(int i=0;i<myarray.length;i++){
-	    myarray[i] = rand.nextInt(10);
+	    myarray[i] = rand.nextInt(1000);
 	}
 	String mystring = "";
 	for(int i=0;i<myarray.length;i++){
@@ -98,10 +105,15 @@ public class Sorts{
 	radix(myarray);
 	mystring= "";
 	for(int i=0;i<myarray.length;i++){
-	    mystring+=myarray[i];
+	    mystring+=myarray[i]+",";
 	}
 	System.out.println(mystring);
-
-    }
+	
+	/*
+	int flag = Integer.parseInt(args[0]);
+	int flag2 = Integer.parseInt(args[1]);
+	System.out.println(flag%flag2/(flag2/10));
+	*/ 
+   }
 
 }
